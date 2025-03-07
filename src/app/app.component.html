@@ -1,9 +1,9 @@
 <div class="h-screen flex flex-col">
     <app-header></app-header>
-    <div class="flex flex-1">
+    <div class="flex flex-row flex-1">
         <app-navigation></app-navigation>
-    <div class="flex-1 bg-gray-100">
-        <router-outlet></router-outlet>
-    </div>
+        <div class="flex-1">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

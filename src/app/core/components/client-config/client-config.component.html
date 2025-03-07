@@ -1,0 +1,15 @@
+<!-- Backdrop -->
+<div class="modal-overlay fixed inset-0 flex justify-center items-center z-1 bg-gray-500/20">
+    <!-- Content -->
+    <div class="relative bg-white w-2/5 h-2/3 z-2 rounded-xl shadow-xl">
+        <div class="flex justify-center rounded-t-xl p-4 bg-sky-200 border-b border-sky-300">
+            <h2 class="text-3xl">Client Einstellungen</h2>
+        </div>
+        <div class="absolute top-4.5 right-4.5 cursor-pointer hover:text-white transition ease-in">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8" (click)="appState.toggleClientConfig()">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>      
+        </div>
+    </div>
+
+</div>
