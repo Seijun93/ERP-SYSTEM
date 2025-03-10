@@ -1,0 +1,17 @@
+<div class="flex justify-center items-center w-screen h-screen bg-sky-100">
+    <div class="flex flex-col justify-center items-center h-1/2 w-1/4 bg-sky-300/40 shadow-2xl rounded-4xl gap-16">
+        <h2 class="text-4xl">Login</h2>
+        <form class="flex flex-col items-center gap-4" [formGroup]="loginForm">
+            <p-floatlabel variant="in">
+                <input pInputText id="email" autocomplete="off" formControlName="email" class="w-64"/>
+                <label for="email">E-Mail</label>
+            </p-floatlabel>
+            <p-floatlabel variant="in">
+                <p-password id="password" [feedback]="false" formControlName="password" [toggleMask]="true" class="w-64"/>
+                <label for="password">Passwort</label>
+            </p-floatlabel>
+            <p-button (click)="register()" label="Registrieren" variant="outlined" [rounded]="true" size="large" severity="info" class="mt-4" />
+            <p-button (click)="login()" label="Login" [rounded]="true" [raised]="true" size="large" severity="info"/>
+        </form>
+    </div>
+</div>

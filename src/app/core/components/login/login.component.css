@@ -1,0 +1,11 @@
+::ng-deep p-password .p-inputwrapper {
+    width: 16rem; /* entspricht w-64 */
+}
+
+::ng-deep p-password .p-password-input {
+    width: 100%; /* sorgt dafür, dass das Passwortfeld sich an den Wrapper anpasst */
+}
+
+::ng-deep .p-button {
+    width: 12rem; /* Beispiel: Breite auf 16rem setzen */
+}
