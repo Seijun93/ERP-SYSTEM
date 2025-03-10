@@ -1,0 +1,79 @@
+<div class="flex flex-row justify-center items-center">
+
+    <form [formGroup]="createCustomerForm" class="flex flex-col m-4 mt-2 gap">
+        <!-- Kundennummer -->
+        <p-floatLabel variant="on" class="mt-4">
+            <input id="id" pInputText formControlName="id">
+            <label for="id">Kundennummer</label>
+        </p-floatLabel>
+
+        <!-- Stammdaten -->
+        <p-fieldset legend="Stammdaten" [toggleable]="true" class="mt-8">
+            <!-- Name -->
+            <p-floatLabel variant="on" class="mt-4">
+                <input id="name" pInputText formControlName="name">
+                <label for="name">Name</label>
+            </p-floatLabel>
+
+            <div class="flex gap-4">
+                <!-- Straße / Hausnummer-->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="street" pInputText formControlName="street">
+                    <label for="street">Straße / Hausnummer</label>
+                </p-floatLabel>
+                <!-- PLZ -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="postcode" pInputText formControlName="postcode">
+                    <label for="postcode">PLZ</label>
+                </p-floatLabel>
+                <!-- Ort -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="city" pInputText formControlName="city">
+                    <label for="city">Ort</label>
+                </p-floatLabel>
+            </div>
+
+        </p-fieldset>
+
+        <!-- Kontaktdaten -->
+        <p-fieldset legend="Kontaktdaten" [toggleable]="true" class="mt-4">
+            <div class="flex gap-4">
+                <!-- E-Mail -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="email" pInputText formControlName="email">
+                    <label for="email">E-Mail</label>
+                </p-floatLabel>
+                <!-- PLZ -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="phone" pInputText formControlName="phone">
+                    <label for="phone">Telefon</label>
+                </p-floatLabel>
+                <!-- Ort -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="mobile" pInputText formControlName="mobile">
+                    <label for="mobile">Handy</label>
+                </p-floatLabel>
+            </div>
+        </p-fieldset>
+
+        <p-fieldset legend="Sonstiges" [toggleable]="true" class="mt-4">
+            <p-floatlabel variant="on" class="mt-4">
+                <textarea id="text" rows="5"cols="85" pTextarea></textarea>
+                <label for="text">Bemerkungen</label>
+            </p-floatlabel>
+        </p-fieldset>
+
+        <!-- Button Area -->
+        <div class="flex justify-between mt-16">
+            <div class="flex ">
+                <p-button label="Clear" variant="outlined" severity="danger" />
+            </div>
+            <div class="flex flex-row-reverse gap-4">
+                <p-button label="Speichern" [raised]="true" severity="success" [disabled]="!this.createCustomerForm.valid" (click)="this.addCustomer(createCustomerForm.getRawValue())"/>
+                <p-button label="Zwischnspeichern" variant="outlined" severity="success" />
+            </div>
+        </div>
+
+    </form>
+
+</div>

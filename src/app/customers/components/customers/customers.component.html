@@ -1,0 +1,47 @@
+<!-- Main Container -->
+<div class="flex flex-col">
+
+    <!-- Head Container -->
+    <div class="flex flex-col">
+        <!-- Headline -->
+        <h2 class="text-4xl font-semibold p-8">Kunden</h2>
+        <!-- Buttons-->
+        <div class="flex flex-row pl-8 gap-4">
+            <p-button (click)="this.customersService.toggleCustomerDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info" [raised]="true"/>
+        </div>
+
+    </div>
+
+    <!-- Body Container -->
+    <div class="p-8">
+
+        <p-table [value]="customers" showGridlines stripedRows [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template #header>
+                <tr>
+                    <th>Kundennummer</th>
+                    <th>Name</th>
+                    <th>Straße</th>
+                    <th>PLZ</th>
+                    <th>Ort</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-customer>
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.street }}</td>
+                    <td>{{ customer.postcode }}</td>
+                    <td>{{ customer.city }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <!-- Add Customer Dialog -->
+
+    <p-dialog header="Neuen Kunden Anlegen" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
+        <app-create-customer></app-create-customer>
+    </p-dialog>
+
+</div>
