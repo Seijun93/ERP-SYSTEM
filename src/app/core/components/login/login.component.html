@@ -10,8 +10,8 @@
                 <p-password id="password" [feedback]="false" formControlName="password" [toggleMask]="true" class="w-64"/>
                 <label for="password">Passwort</label>
             </p-floatlabel>
-            <p-button (click)="register()" label="Registrieren" variant="outlined" [rounded]="true" size="large" severity="info" class="mt-4" />
-            <p-button (click)="login()" label="Login" [rounded]="true" [raised]="true" size="large" severity="info"/>
+            <p-button (click)="onSignup()" label="Registrieren" variant="outlined" [rounded]="true" size="large" severity="info" class="mt-4" />
+            <p-button (click)="onLogin()" label="Login" [rounded]="true" [raised]="true" size="large" severity="info"/>
         </form>
     </div>
 </div>

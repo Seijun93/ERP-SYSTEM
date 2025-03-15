@@ -29,24 +29,26 @@ export class CreateCustomerComponent {
 
   createCustomerForm: FormGroup;
 
+  selectedCustomer: Customer | null = this.customersService.selectedCustomer
+
   constructor(private fb: FormBuilder) {
 
     this.createCustomerForm = this.fb.group({
-      id: [ {value:'', disabled: true} ],
-      name: [ '', [Validators.required] ],
-      street: [ '', [Validators.required] ],
-      postcode: [ '', [Validators.required, Validators.pattern('^[0-9]{5}$')] ],
-      city: [ '', [Validators.required] ],
-      email: [ '', [Validators.email] ],
-      phone: [ '', [Validators.pattern('^[0-9]*$')] ],
-      mobile: [ '', [Validators.pattern('^[0-9]*$')] ],
-      text: [ '' ]
+      id: [ {value: this.selectedCustomer?.id, disabled: true} ],
+      name: [ this.selectedCustomer?.name, [Validators.required] ],
+      street: [ this.selectedCustomer?.street, [Validators.required] ],
+      postcode: [ this.selectedCustomer?.postcode, [Validators.required, Validators.pattern('^[0-9]{5}$')] ],
+      city: [ this.selectedCustomer?.city, [Validators.required] ],
+      email: [ this.selectedCustomer?.email, [Validators.email] ],
+      phone: [ this.selectedCustomer?.phone, [Validators.pattern('^[0-9]*$')] ],
+      mobile: [ this.selectedCustomer?.mobile, [Validators.pattern('^[0-9]*$')] ],
+      text: [ this.selectedCustomer?.text ]
     })
-
+    
   }
 
   addCustomer(customer: Customer) {
-    this.customersService.addCustomer(customer)
+    this.customersService.saveCustomer(customer)
     this.clearForm()
     this.customersService.toggleCustomerDialog()
   }

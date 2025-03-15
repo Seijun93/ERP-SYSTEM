@@ -7,7 +7,7 @@
         <h2 class="text-4xl font-semibold p-8">Kunden</h2>
         <!-- Buttons-->
         <div class="flex flex-row pl-8 gap-4">
-            <p-button (click)="this.customersService.toggleCustomerDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info" [raised]="true"/>
+            <p-button (click)="this.customersService.addCustomerDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info" [raised]="true"/>
         </div>
 
     </div>
@@ -25,8 +25,8 @@
                     <th>Ort</th>
                 </tr>
             </ng-template>
-            <ng-template #body let-customer>
-                <tr>
+            <ng-template #body let-customer let-i="rowIndex">
+                <tr (dblclick)="openCustomer(i)" class="customer cursor-pointer">
                     <td>{{ customer.id }}</td>
                     <td>{{ customer.name }}</td>
                     <td>{{ customer.street }}</td>
@@ -38,10 +38,11 @@
 
     </div>
 
-    <!-- Add Customer Dialog -->
+    @if (this.customersService.showCustomerDialog()) {
+        <p-dialog header="Neuen Kunden Anlegen" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
+            <app-create-customer></app-create-customer>
+        </p-dialog>
+    }
 
-    <p-dialog header="Neuen Kunden Anlegen" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
-        <app-create-customer></app-create-customer>
-    </p-dialog>
 
 </div>

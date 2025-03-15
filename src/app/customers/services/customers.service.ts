@@ -23,22 +23,36 @@ export class CustomersService {
     },
   ]
 
+  selectedCustomer: Customer | null = null
+
   showCustomerDialog = signal(false);
 
   toggleCustomerDialog () {
     this.showCustomerDialog.update(value => !value)
-    console.log(this.showCustomerDialog())
   }
 
-  addCustomer (customer: Customer) {
-    if (this.customers.length === 0) {
-      customer.id = 1
+  addCustomerDialog () {
+    this.selectedCustomer = null
+    this.toggleCustomerDialog()
+  }
+
+  saveCustomer (customer: Customer) {
+    if (customer.id !== null) {
+      //Update Customer
+      const customerIndex = this.customers.findIndex(c => c.id === customer.id)
+      this.customers[customerIndex] = customer
     }
     else {
-      const id = Math.max(...this.customers.map(customer => customer.id)) + 1
-      customer.id = id
+      //Add new Customer
+      if (this.customers.length === 0) {
+        customer.id = 1
+      }
+      else {
+        const id = Math.max(...this.customers.map(customer => customer.id)) + 1
+        customer.id = id
+      }
+      this.customers.push(customer)
     }
-    this.customers.push(customer)
   }
 
 }

@@ -26,8 +26,10 @@ export class CustomersComponent{
   customers: Customer[] = this.customersService.customers
   showCustomersDialog: boolean = false
 
-  constructor () {
-
+  openCustomer(index: number) {
+    this.customersService.selectedCustomer = this.customersService.customers[index]
+    this.customersService.showCustomerDialog.update(value => !value)
   }
+
 
 }

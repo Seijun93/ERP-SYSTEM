@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./core/components/header/header.component";
-import { NavigationComponent } from "./core/components/navigation/navigation.component";
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, NavigationComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'erp-system';
+
+  authService = inject(AuthService)
+
+  ngOnInit(): void {
+    this.authService.autoLogin()
+  }
 }
