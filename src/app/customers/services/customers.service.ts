@@ -34,8 +34,8 @@ export class CustomersService {
   saveCustomer (customer: Customer) {
     if (customer.number !== undefined) {
       //Update Customer
-      const customerIndex = this.customers.findIndex(c => c.number === customer.number)
-      this.customers[customerIndex] = customer
+      console.log('update',customer)
+      this.updateCustomer(customer)
     }
     else {
       //Add new Customer
@@ -86,7 +86,25 @@ export class CustomersService {
 
   //Update Funktion
 
-  updateCustomer() {
+  updateCustomer(updatedCustomer: Customer) {
+    const index = this.customers.findIndex(c => c.number === updatedCustomer.number)
+    updatedCustomer.id = this.customers[index].id
+
+    if (updatedCustomer === null || !updatedCustomer.id) {
+      console.log('crash', updatedCustomer, !updatedCustomer.id)
+      return
+    }
+
+    this.http.patch(
+      `https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers/${updatedCustomer.id}.json`,
+      updatedCustomer
+    ).subscribe(() => {
+      console.log('update gesendet')
+      if (index !== -1) {
+        this.customers[index] = updatedCustomer!
+      }
+    })
+
 
   }
 
