@@ -27,7 +27,7 @@
             </ng-template>
             <ng-template #body let-customer let-i="rowIndex">
                 <tr (dblclick)="openCustomer(i)" class="customer cursor-pointer">
-                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.number }}</td>
                     <td>{{ customer.name }}</td>
                     <td>{{ customer.street }}</td>
                     <td>{{ customer.postcode }}</td>

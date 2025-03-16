@@ -34,7 +34,7 @@ export class CreateCustomerComponent {
   constructor(private fb: FormBuilder) {
 
     this.createCustomerForm = this.fb.group({
-      id: [ {value: this.selectedCustomer?.id, disabled: true} ],
+      number: [ {value: this.selectedCustomer?.number, disabled: true} ],
       name: [ this.selectedCustomer?.name, [Validators.required] ],
       street: [ this.selectedCustomer?.street, [Validators.required] ],
       postcode: [ this.selectedCustomer?.postcode, [Validators.required, Validators.pattern('^[0-9]{5}$')] ],

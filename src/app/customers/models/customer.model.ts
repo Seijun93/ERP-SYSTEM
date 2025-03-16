@@ -1,6 +1,7 @@
 export interface Customer {
 
-    id: number;
+    id?: string;
+    number: number;
     name: string;
     street: string;
     postcode: number;
