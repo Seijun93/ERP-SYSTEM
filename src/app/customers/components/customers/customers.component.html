@@ -23,6 +23,7 @@
                     <th>Straße</th>
                     <th>PLZ</th>
                     <th>Ort</th>
+                    <th>FirebaseId</th>
                 </tr>
             </ng-template>
             <ng-template #body let-customer let-i="rowIndex">
@@ -32,6 +33,7 @@
                     <td>{{ customer.street }}</td>
                     <td>{{ customer.postcode }}</td>
                     <td>{{ customer.city }}</td>
+                    <td>{{ customer.id }}</td>
                 </tr>
             </ng-template>
         </p-table>

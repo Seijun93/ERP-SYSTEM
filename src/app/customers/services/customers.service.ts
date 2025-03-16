@@ -12,7 +12,7 @@ export class CustomersService {
   http = inject(HttpClient)
 
   constructor() {
-    this.fetchCustomers()
+    this.readCustomers()
     console.log(this.customers)
   }
 
@@ -47,22 +47,25 @@ export class CustomersService {
         customer.number = customerNumber
       }
       this.createCustomer(customer)
-      this.customers.push(customer)
     }
   }
 
-  //CRUD Funktions
+  //CRUD Funktionen
 
+  //Create Funktion
   createCustomer (customerData: Customer) {
-    this.http.post(
+    this.http.post<{ name: string }>(
       'https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers.json',
       customerData
     ).subscribe(resData => {
       console.log(resData)
+      customerData.id = resData.name
+      this.customers.push(customerData)
     })
   }
 
-  private fetchCustomers() {
+  //Read Funktion
+  private readCustomers() {
     this.http
       .get<{[key: string]: Customer }>('https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers.json')
       .pipe(map(resData => {
@@ -78,6 +81,33 @@ export class CustomersService {
         for (const customer of customers) {
           this.customers.push(customer)
         }
+    })
+  }
+
+  //Update Funktion
+
+  updateCustomer() {
+
+  }
+
+  //Delete Funktion
+
+  deleteCustomer() {
+    if (this.selectedCustomer === null || this.selectedCustomer.id === null) {
+      return
+    }
+    this.http.delete(`https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers/${this.selectedCustomer.id}.json`)
+    .subscribe(() => {
+      const deletedIndex = this.customers.findIndex(c => c.id === this.selectedCustomer!.id)
+      if (deletedIndex !== -1) {
+        this.customers.splice(deletedIndex, 1)
+      }
+
+      this.selectedCustomer = null
+      this.toggleCustomerDialog()
+    },error => {
+      console.error('❌ Fehler beim Löschen des Kunden:', error)
+      alert('❌ Fehler beim Löschen des Kunden')
     })
   }
 

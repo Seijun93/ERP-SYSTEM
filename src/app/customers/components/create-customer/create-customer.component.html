@@ -65,12 +65,13 @@
 
         <!-- Button Area -->
         <div class="flex justify-between mt-16">
-            <div class="flex ">
-                <p-button label="Clear" variant="outlined" severity="danger" />
+            <div class="flex gap-4">
+                <p-button label="Löschen" severity="danger" (click)="customersService.deleteCustomer()"/>
             </div>
             <div class="flex flex-row-reverse gap-4">
                 <p-button label="Speichern" [raised]="true" severity="success" [disabled]="!this.createCustomerForm.valid" (click)="this.addCustomer(createCustomerForm.getRawValue())"/>
                 <p-button label="Zwischnspeichern" variant="outlined" severity="success" />
+                <p-button label="Clear" variant="outlined" severity="danger" />
             </div>
         </div>
 
