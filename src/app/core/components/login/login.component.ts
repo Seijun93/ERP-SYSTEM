@@ -68,4 +68,8 @@ export class LoginComponent {
     this.loginForm.reset()
   }
 
+  onForgottenPassword() {
+    alert('Pech gehabt')
+  }
+
 }

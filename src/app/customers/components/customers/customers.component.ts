@@ -25,11 +25,34 @@ export class CustomersComponent{
 
   customers: Customer[] = this.customersService.customers
   showCustomersDialog: boolean = false
+  markedCells: any[] = []
 
   openCustomer(index: number) {
     this.customersService.selectedCustomer = this.customersService.customers[index]
     this.customersService.showCustomerDialog.update(value => !value)
   }
 
+  toggleSelect(event: Event) {
+    if (!(event instanceof KeyboardEvent)) {
+      return; // Stellt sicher, dass es ein Keyboard-Event ist
+    }
+    const rowElement = (event.target as HTMLElement).closest('tr');
+    if (rowElement) {
+      rowElement.classList.toggle('bg-sky-800');
+    }
+  }
+
+  toggleMark(event: MouseEvent) {
+    const cell = event.target as HTMLElement
+
+    if (this.markedCells.length > 0 && !event.ctrlKey) {
+      for (const markedCell of this.markedCells) {
+        markedCell.classList.toggle('bg-amber-500')
+      }
+      this.markedCells = []
+    }
+    this.markedCells.push(cell)
+    cell.classList.toggle('bg-amber-500')
+  }
 
 }

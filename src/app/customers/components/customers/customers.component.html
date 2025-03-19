@@ -1,21 +1,21 @@
 <!-- Main Container -->
-<div class="flex flex-col">
+<div class="flex-1 min-h-full flex-col bg-gradient-to-br from-sky-50/40 to-sky-200/40">
 
-    <!-- Head Container -->
-    <div class="flex flex-col">
-        <!-- Headline -->
-        <h2 class="text-4xl font-semibold p-8">Kunden</h2>
+        <!-- Head Container -->
+        <div class="flex flex-col">
+            <!-- Headline -->
+            <h2 class="text-4xl font-semibold p-8">Kunden</h2>
         <!-- Buttons-->
         <div class="flex flex-row pl-8 gap-4">
             <p-button (click)="this.customersService.addCustomerDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info" [raised]="true"/>
         </div>
-
+        
     </div>
-
+    
     <!-- Body Container -->
     <div class="p-8">
-
-        <p-table [value]="customers" showGridlines stripedRows [tableStyle]="{ 'min-width': '50rem' }">
+        
+        <p-table [value]="customers" class="drop-shadow-xs" showGridlines stripedRows [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template #header>
                 <tr>
                     <th>Kundennummer</th>
@@ -23,28 +23,31 @@
                     <th>Straße</th>
                     <th>PLZ</th>
                     <th>Ort</th>
-                    <th>FirebaseId</th>
+                    <th>Telefon</th>
+                    <th>Mobil</th>
+                    <th>E-Mail</th>
                 </tr>
             </ng-template>
             <ng-template #body let-customer let-i="rowIndex">
-                <tr (dblclick)="openCustomer(i)" class="customer cursor-pointer">
-                    <td>{{ customer.number }}</td>
-                    <td>{{ customer.name }}</td>
-                    <td>{{ customer.street }}</td>
-                    <td>{{ customer.postcode }}</td>
-                    <td>{{ customer.city }}</td>
-                    <td>{{ customer.id }}</td>
+                <tr (dblclick)="openCustomer(i)" (keyup.insert)="toggleSelect($event)" class="customer cursor-pointer" tabindex="0">
+                    <td (click)="toggleMark($event)" [classList]="">{{ customer.number }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.name }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.street }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.postcode }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.city }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.phone }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.mobile }}</td>
+                    <td (click)="toggleMark($event)">{{ customer.email }}</td>
                 </tr>
             </ng-template>
         </p-table>
-
+        
     </div>
-
+    
     @if (this.customersService.showCustomerDialog()) {
-        <p-dialog header="Neuen Kunden Anlegen" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
+        <p-dialog header="Kunden Details" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
             <app-create-customer></app-create-customer>
         </p-dialog>
     }
-
 
 </div>

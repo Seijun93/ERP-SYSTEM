@@ -1,7 +1,7 @@
-<div class="flex justify-center items-center w-screen h-screen bg-sky-100">
-    <div class="flex flex-col justify-center items-center h-1/2 w-1/4 bg-sky-300/40 shadow-2xl rounded-4xl gap-16">
-        <h2 class="text-4xl">Login</h2>
-        <form class="flex flex-col items-center gap-4" [formGroup]="loginForm">
+<div class="flex justify-center items-center w-screen h-screen bg-gradient-to-br from-sky-100 to-sky-300">
+    <div class="bg-white/60 relative shadow-xl rounded-3xl p-10 w-96 flex flex-col gap-6 transition-all duration-300 hover:shadow-2xl hover:scale-105">
+        <h2 class="text-3xl font-semibold text-gray-800 text-center">Login</h2>
+        <form class="flex flex-col items-center gap-4" [formGroup]="loginForm" (keyup.enter)="onLogin()">
             <p-floatlabel variant="in">
                 <input pInputText id="email" autocomplete="off" formControlName="email" class="w-64"/>
                 <label for="email">E-Mail</label>
@@ -10,7 +10,12 @@
                 <p-password id="password" [feedback]="false" formControlName="password" [toggleMask]="true" class="w-64"/>
                 <label for="password">Passwort</label>
             </p-floatlabel>
-            <p-button (click)="onSignup()" label="Registrieren" variant="outlined" [rounded]="true" size="large" severity="info" class="mt-4" />
+            <div class="flex flex-col items-center w-full px-2 text-sm text-sky-500">
+                <a (click)="onForgottenPassword()" routerLinkActive="router-link-active"  class="text-sky-500 hover:text-sky-600 hover:underline transition-all duration-200 cursor-pointer">
+                    Passwort vergessen?
+                </a>
+            </div>
+            <p-button (click)="onSignup()" label="Registrieren" variant="outlined" [rounded]="true" size="large" severity="info" class="mt-4" size="small"/>
             <p-button (click)="onLogin()" label="Login" [rounded]="true" [raised]="true" size="large" severity="info"/>
         </form>
     </div>

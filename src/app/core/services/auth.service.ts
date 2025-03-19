@@ -54,7 +54,25 @@ export class AuthService {
         returnSecureToken: true
       }
     )
-    .pipe(catchError(this.handleError))
+    .pipe(catchError(this.handleError),
+    tap(() => {
+      console.log('Registrierung erfolgreich')
+      this.login(email, password).subscribe(
+        () => {
+          this.router.navigate([''])
+        },
+        error => {
+          console.error('Fehler beim Login')
+        }
+      )
+    })
+    )
+  }
+
+  logout() {
+    localStorage.removeItem('userData')
+    this.user.next(null)
+    this.router.navigate(['/login'])
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
