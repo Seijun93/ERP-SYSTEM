@@ -15,7 +15,7 @@
     <!-- Body Container -->
     <div class="p-8">
         
-        <p-table [value]="customers" class="drop-shadow-xs" showGridlines stripedRows [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="customers" class="drop-shadow-xs" showGridlines stripedRows [tableStyle]="{ 'min-width': '50rem' }" tabindex="0">
             <ng-template #header>
                 <tr>
                     <th>Kundennummer</th>
@@ -29,7 +29,7 @@
                 </tr>
             </ng-template>
             <ng-template #body let-customer let-i="rowIndex">
-                <tr (dblclick)="openCustomer(i)" (keyup.insert)="toggleSelect($event)" class="customer cursor-pointer" tabindex="0">
+                <tr (dblclick)="openCustomer(i)" class="customer cursor-pointer" tabindex="0">
                     <td (click)="toggleMark($event)" [classList]="">{{ customer.number }}</td>
                     <td (click)="toggleMark($event)">{{ customer.name }}</td>
                     <td (click)="toggleMark($event)">{{ customer.street }}</td>
