@@ -42,7 +42,7 @@ export class CreateProductComponent {
   initForm(product: Product | null = null) {
 
     this.createProductForm = this.fb.group({
-      productId: [{ value: product?.productId ?? null, disabled: true }],
+      articleNumber: [{ value: product?.articleNumber ?? null, disabled: true }],
       name: [product?.name ?? null, [Validators.required]],
       cathegory: [product?.cathegory ?? null, [Validators.required]],
       sellPrice: [product?.sellPrice ?? null, [Validators.required]]

@@ -32,7 +32,7 @@ export class ProductsService {
 
   saveProduct (product: Product) {
     console.log(product.id)
-    if (product.productId !== null) {
+    if (product.articleNumber !== null) {
       //Update Product
       console.log('update',product)
       this.updateProduct(product)
@@ -40,11 +40,11 @@ export class ProductsService {
     else {
       //Add new Product
       if (this.products.length === 0 || this.products.length === undefined) {
-        product.productId = 1
+        product.articleNumber = 1
       }
       else {
-        const productId = Math.max(...this.products.map(product => product.productId)) + 1
-        product.productId = productId
+        const articleNumber = Math.max(...this.products.map(product => product.articleNumber)) + 1
+        product.articleNumber = articleNumber
       }
       this.createProduct(product)
     }
@@ -85,7 +85,7 @@ export class ProductsService {
 
   //Update Funktion
   updateProduct(updatedProduct: Product) {
-    const index = this.products.findIndex(c => c.productId === updatedProduct.productId)
+    const index = this.products.findIndex(c => c.articleNumber === updatedProduct.articleNumber)
     updatedProduct.id = this.products[index].id
 
     if (updatedProduct === null || !updatedProduct.id) {

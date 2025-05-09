@@ -29,7 +29,7 @@ export class ProductsComponent {
   products: Product[] = this.productsService.products
   
   tablePropertys = [
-    {label: 'Produkt-ID', key: 'productId', class: 'min-w-40 w-40'},
+    {label: 'Artikelnummer', key: 'articleNumber', class: 'min-w-40 w-40'},
     {label: 'Produktname', key: 'name', class: 'min-w-60 w-60'},
     {label: 'Kathegorie', key: 'cathegory', class: 'min-w-80 w-80'},
     {label: 'Verkaufspreis', key: 'sellPrice', class: 'min-w-40 w-40', pipe: "currency:'EUR':'symbol':'1.2-2':'de'"}
