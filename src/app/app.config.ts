@@ -9,6 +9,11 @@ import { initializeApp } from "firebase/app";
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+
+registerLocaleData(localeDe);
+
 // Deine Firebase-Konfiguration
 const firebaseConfig = {
   apiKey: "AIzaSyBpHzTW_9vNQHL2mfCCQ3PvcfHL1x5wFmg",

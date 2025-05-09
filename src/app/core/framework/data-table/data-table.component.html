@@ -1,0 +1,20 @@
+<p-table [value]="data" class="drop-shadow-xs" showGridlines stripedRows resizableColumns [tableStyle]="{ 'min-width': '50rem' }" tabindex="0">
+    <ng-template #header>
+        <tr>
+            @for (heading of columns; track $index) {
+                <th pResizableColumn class="min-w-40 w-40">{{ heading.label }}</th>
+            }
+        </tr>
+    </ng-template>
+    <ng-template #body let-data let-i="rowIndex">
+        <tr (dblclick)="openData(i)" class="customer cursor-pointer" tabindex="0">
+
+            @for (row of columns; track $index) {
+
+                <td (click)="toggleMark($event)" [class]="row.class">{{ applyPipe(data[row.key], row.pipe) }}</td>
+
+            }
+            
+        </tr>
+    </ng-template>
+</p-table>

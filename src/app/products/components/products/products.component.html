@@ -1,1 +1,24 @@
-<p>products works!</p>
+<!-- Main Container -->
+<div class="flex-1 min-h-full flex-col bg-gradient-to-br from-sky-50/40 to-sky-200/40">
+
+    <!-- Head Container -->
+    <div class="flex flex-col">
+        <!-- Headline -->
+        <h2 class="text-4xl font-semibold p-8">Produkte</h2>
+    <!-- Buttons-->
+    <div class="flex flex-row pl-8 gap-4">
+        <p-button (click)="this.productsService.addProductDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info" [raised]="true"/>
+    </div>
+    
+</div>
+
+<!-- Body Container -->
+<div class="p-8">
+    <app-data-table [data]="this.products" [columns]="tablePropertys" [openData]="openProduct.bind(this)" />
+</div>
+
+@if (this.productsService.showProductsDialog()) {
+    <p-dialog header="Kunden Details" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.productsService.showProductsDialog" [style]="{ minWidth: '48rem' }">
+        <app-create-product />
+    </p-dialog>
+}

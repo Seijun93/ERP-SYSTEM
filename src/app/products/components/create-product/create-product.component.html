@@ -1,0 +1,47 @@
+<div class="flex flex-row justify-center items-center">
+
+    <form [formGroup]="createProductForm" class="flex flex-col m-4 mt-2 gap">
+        <!-- Product-ID -->
+        <p-floatLabel variant="on" class="mt-4">
+            <input id="productId" pInputText formControlName="productId">
+            <label for="productId">Product-ID</label>
+        </p-floatLabel>
+
+        <!-- Produktdaten -->
+        <p-fieldset legend="Produktdaten" [toggleable]="true" class="mt-8">
+            
+            <div class="flex gap-4">
+                <!-- Produktname -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="name" pInputText formControlName="name">
+                    <label for="name">Produktname</label>
+                </p-floatLabel>
+                <!-- Kathegorie -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <input id="cathegory" pInputText formControlName="cathegory">
+                    <label for="cathegory">Kathegory</label>
+                </p-floatLabel>
+                <!-- Verkaufspreis -->
+                <p-floatLabel variant="on" class="mt-4">
+                    <p-inputNumber inputId="sellPrice" formControlName="sellPrice" mode="currency" currency="EUR" locale="de-DE"></p-inputNumber>
+                    <label for="sellPrice">Verkaufspreis (Netto)</label>
+                </p-floatLabel>
+            </div>
+
+        </p-fieldset>
+
+        <!-- Button Area -->
+        <div class="flex justify-between mt-16">
+            <div class="flex gap-4">
+                <p-button label="Löschen" severity="danger" (click)="productsService.deleteProduct()"/>
+            </div>
+            <div class="flex flex-row-reverse gap-4">
+                <p-button label="Speichern" [raised]="true" severity="success" [disabled]="!this.createProductForm.valid" (click)="this.addProduct(createProductForm.getRawValue())"/>
+                <p-button label="Zwischnspeichern" variant="outlined" severity="success" />
+                <p-button label="Clear" variant="outlined" severity="danger" (click)="this.clearForm()"/>
+            </div>
+        </div>
+
+    </form>
+
+</div>

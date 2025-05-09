@@ -1,3 +1,36 @@
 .customer:hover {
     background-color: #7dd3fc !important;
 }
+
+th {
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+::ng-deep .p-datatable {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+  
+::ng-deep .p-datatable .p-datatable-wrapper {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+/* Obere linke und rechte Ecke */
+::ng-deep .p-datatable-thead > tr:first-child > th:first-child {
+    border-top-left-radius: 0.75rem;
+}
+
+::ng-deep .p-datatable-thead > tr:first-child > th:last-child {
+    border-top-right-radius: 0.75rem;
+}
+
+/* Untere linke und rechte Ecke */
+::ng-deep .p-datatable-tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 0.75rem;
+}
+
+::ng-deep .p-datatable-tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius: 0.75rem;
+}

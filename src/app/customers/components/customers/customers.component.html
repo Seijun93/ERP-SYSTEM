@@ -14,39 +14,13 @@
     
     <!-- Body Container -->
     <div class="p-8">
-        
-        <p-table [value]="customers" class="drop-shadow-xs" showGridlines stripedRows [tableStyle]="{ 'min-width': '50rem' }" tabindex="0">
-            <ng-template #header>
-                <tr>
-                    <th>Kundennummer</th>
-                    <th>Name</th>
-                    <th>Straße</th>
-                    <th>PLZ</th>
-                    <th>Ort</th>
-                    <th>Telefon</th>
-                    <th>Mobil</th>
-                    <th>E-Mail</th>
-                </tr>
-            </ng-template>
-            <ng-template #body let-customer let-i="rowIndex">
-                <tr (dblclick)="openCustomer(i)" class="customer cursor-pointer" tabindex="0">
-                    <td (click)="toggleMark($event)" [classList]="">{{ customer.number }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.name }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.street }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.postcode }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.city }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.phone }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.mobile }}</td>
-                    <td (click)="toggleMark($event)">{{ customer.email }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-        
+        <app-data-table [data]="this.customers" [columns]="this.tablePropertys" [openData]="openCustomer.bind(this)"/>
     </div>
+
     
     @if (this.customersService.showCustomerDialog()) {
         <p-dialog header="Kunden Details" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
-            <app-create-customer></app-create-customer>
+            <app-create-customer />
         </p-dialog>
     }
 

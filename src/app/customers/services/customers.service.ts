@@ -13,7 +13,6 @@ export class CustomersService {
 
   constructor() {
     this.readCustomers()
-    console.log(this.customers)
   }
 
   customers: Customer[] = []
@@ -32,7 +31,7 @@ export class CustomersService {
   }
 
   saveCustomer (customer: Customer) {
-    if (customer.number !== undefined) {
+    if (customer.number !== null) {
       //Update Customer
       console.log('update',customer)
       this.updateCustomer(customer)
@@ -58,7 +57,6 @@ export class CustomersService {
       'https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers.json',
       customerData
     ).subscribe(resData => {
-      console.log(resData)
       customerData.id = resData.name
       this.customers.push(customerData)
     })
@@ -109,7 +107,6 @@ export class CustomersService {
   }
 
   //Delete Funktion
-
   deleteCustomer() {
     if (this.selectedCustomer === null || this.selectedCustomer.id === null) {
       return
