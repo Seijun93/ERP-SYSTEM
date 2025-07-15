@@ -1,21 +1,28 @@
 <!-- Main Container -->
 <div class="flex-1 min-h-full flex-col bg-gradient-to-br from-sky-50/40 to-sky-200/40">
 
-    <!-- Head Container -->
-    <div class="flex flex-col">
-        <!-- Headline -->
-        <h2 class="text-4xl font-semibold p-8">Produkte</h2>
-    <!-- Buttons-->
-    <div class="flex flex-row pl-8 gap-4">
-        <p-button (click)="this.productsService.addProductDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info" [raised]="true"/>
-    </div>
+    <div [@fadeIn]>
+        <!-- Head Container -->
+        <div class="flex flex-end justify-between items-end">
+            <!-- Headline -->
+            <h2 class="text-4xl font-semibold mt-8 ml-8">Produkte</h2>
+            <!-- Buttons-->
+            <div class="flex flex-row mr-8 gap-8 items-end">
+                <p-iconfield class="w-64">
+                    <p-inputicon class="pi pi-search" />
+                    <input type="text" pInputText placeholder="Suchen" class="w-full h-[2.25rem] px-3 text-sm rounded-md border "/>
+                </p-iconfield>
+                <p-splitbutton label="Aktion auswählen" [model]="[{ label: 'Vorgang erstellen', icon: 'pi pi-folder-open' }, { label: 'Angebot erstellen', icon:'pi pi-file' }]" size="small" outlined severity="info"/>
+                <p-button (click)="'console.log(noch nichts eingefügt)'" label="Löschen" icon="pi pi-trash" size="small" severity="danger"/>
+                <p-button (click)="this.productsService.addProductDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info"/>
+            </div>      
+        </div>
     
-</div>
-
-<!-- Body Container -->
-<div class="p-8">
-    <app-data-table [data]="this.products" [columns]="tablePropertys" [openData]="openProduct.bind(this)" />
-</div>
+        <!-- Body Container -->
+        <div class="p-8">
+            <app-data-table [data]="this.products" [columns]="tablePropertys" [openData]="openProduct.bind(this)" />
+        </div>
+    </div>
 
 @if (this.productsService.showProductsDialog()) {
     <p-dialog header="Kunden Details" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.productsService.showProductsDialog" [style]="{ minWidth: '48rem' }">

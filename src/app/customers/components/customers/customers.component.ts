@@ -1,8 +1,13 @@
 import { Component, inject } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { CustomersService } from '../../services/customers.service';
 import { Customer } from '../../models/customer.model';
@@ -16,10 +21,22 @@ import { DataTableComponent } from '../../../core/framework/data-table/data-tabl
     TableModule,
     DialogModule,
     CreateCustomerComponent,
-    DataTableComponent
+    DataTableComponent,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule,
+    SplitButtonModule
   ],
   templateUrl: './customers.component.html',
-  styleUrl: './customers.component.css'
+  styleUrl: './customers.component.css',
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('800ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class CustomersComponent {
 

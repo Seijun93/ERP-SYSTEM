@@ -1,8 +1,8 @@
-<header class="flex flex-row justify-between items-center border-b border-sky-300 min-h-8 bg-sky-200 p-3 rounded-b-xs drop-shadow-sm">
+<!-- <header class="flex justify-between items-center border-b border-sky-400 bg-sky-200 px-4 py-2 rounded-b drop-shadow-sm">
     <div>
-        <h2 class="text-xl">ERP-System</h2>
+        <h2 class="text-xl font-semibold text-sky-900 tracking-tight">ERP-System</h2>
     </div>
-    <div class="flex flex-row-reverse pr-2 items-center gap-5">
+    <div class="flex flex-row-reverse items-center gap-3 pr-3">
         
         <p-button icon="pi pi-user" severity="info" [rounded]="true" size="large" [raised]="true"/>
 
@@ -10,6 +10,24 @@
 
         <p-button (click)="appState.toggleClientConfig()" icon="pi pi-cog" severity="info" [rounded]="true" [outlined]="true" size="large" [raised]="true"/>
 
+    </div>
+</header> -->
+
+<header class="w-full flex items-center justify-between px-6 py-2.5 bg-sky-200 border-b border-sky-300 shadow-md rounded-b-md">
+    <!-- Logo / Systemname -->
+    <div class="flex items-center gap-4">
+        <i class="pi pi-th-large text-sky-700" style="font-size: 1.5rem; line-height: 1;"></i>
+        <div class="flex items-end">
+            <span class="text-2xl font-bold text-sky-900">Combitas</span>
+            <span class="text-ml italic text-sky-700 pl-2.5 pb-0.25">Die Plattform für morgen schon heute</span>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center gap-3">
+        <p-button (click)="appState.toggleClientConfig()" icon="pi pi-cog" severity="info" [rounded]="true" [outlined]="true"/>
+        <p-button (click)="authService.logout()" icon="pi pi-sign-out" severity="info" [rounded]="true" [outlined]="true"/>
+        <p-button icon="pi pi-user" severity="info" [rounded]="true" size="small" [raised]="true"/>
     </div>
 </header>
 

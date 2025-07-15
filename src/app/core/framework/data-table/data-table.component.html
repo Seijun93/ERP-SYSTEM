@@ -1,4 +1,4 @@
-<p-table [value]="data" class="drop-shadow-xs" showGridlines stripedRows resizableColumns [tableStyle]="{ 'min-width': '50rem' }" tabindex="0">
+<p-table [value]="data" class="drop-shadow-xs" showGridlines stripedRows resizableColumns [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template #header>
         <tr>
             @for (heading of columns; track $index) {
@@ -7,7 +7,7 @@
         </tr>
     </ng-template>
     <ng-template #body let-data let-i="rowIndex">
-        <tr (dblclick)="openData(i)" class="customer cursor-pointer" tabindex="0">
+        <tr (dblclick)="openData(i)" class="customer cursor-pointer">
 
             @for (row of columns; track $index) {
 

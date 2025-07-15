@@ -85,7 +85,7 @@ export class DataTableComponent {
       }
 
       rowsToMark.forEach(row => {
-        row.classList.add("!bg-sky-800", "!text-white")
+        row.classList.add("selected")
         const index = allRows.indexOf(row)
         const data = this.data[index]
         if (data) this.selection.push(data)
@@ -102,7 +102,7 @@ export class DataTableComponent {
       }
 
       rowsToUnmark.forEach(row => {
-        row.classList.remove("!bg-sky-800", "!text-white")
+        row.classList.remove("selected")
         const index = allRows.indexOf(row)
         const data = this.data[index]
         if (data) {
@@ -115,7 +115,7 @@ export class DataTableComponent {
       const rows = document.querySelectorAll("tbody tr") as NodeListOf<HTMLTableRowElement>
       this.selection = []
       rows.forEach((row, index) => {
-        row.classList.add("!bg-sky-800", "!text-white")
+        row.classList.add("selected")
         const customer = this.data[index]
         if (customer) this.selection.push(customer)
       })
@@ -123,7 +123,7 @@ export class DataTableComponent {
 
     if (event.key === "-") {
       const rows = document.querySelectorAll("tbody tr") as NodeListOf<HTMLTableRowElement>
-      rows.forEach(row => row.classList.remove("!bg-sky-800", "!text-white"))
+      rows.forEach(row => row.classList.remove("selected"))
       this.selection = []
     }
 
@@ -132,12 +132,12 @@ export class DataTableComponent {
       const allCells = Array.from(document.querySelectorAll("tbody td")) as HTMLTableCellElement[]
 
       for (const marked of this.markedCells) {
-        marked.classList.remove("bg-amber-500")
+        marked.classList.remove("marked")
       }
       this.markedCells = []
 
       for (const cell of allCells) {
-        cell.classList.add("bg-amber-500")
+        cell.classList.add("marked")
         this.markedCells.push(cell)
       }
 
@@ -166,7 +166,7 @@ export class DataTableComponent {
 
       if (!event.ctrlKey) {
         for (const marked of this.markedCells) {
-          marked.classList.remove("bg-amber-500")
+          marked.classList.remove("marked")
         }
         this.markedCells = []
       }
@@ -175,7 +175,7 @@ export class DataTableComponent {
         for (let col = fromCol; col <= toCol; col++) {
           const target = allRows[row].children[col] as HTMLTableCellElement;
           if (!this.markedCells.includes(target)) {
-            target.classList.add("bg-amber-500")
+            target.classList.add("marked")
             this.markedCells.push(target)
           }
         }
@@ -185,16 +185,16 @@ export class DataTableComponent {
 
     if (!(event instanceof KeyboardEvent) && !event.ctrlKey) {
       for (const marked of this.markedCells) {
-        marked.classList.remove("bg-amber-500")
+        marked.classList.remove("marked")
       }
       this.markedCells = []
     }
 
     if (this.markedCells.includes(cell)) {
-      cell.classList.remove("bg-amber-500")
+      cell.classList.remove("marked")
       this.markedCells = this.markedCells.filter(c => c !== cell)
     } else {
-      cell.classList.add("bg-amber-500")
+      cell.classList.add("marked")
       this.markedCells.push(cell)
     }
 
@@ -232,14 +232,14 @@ export class DataTableComponent {
   markAllCells() {
     // Alte Markierungen entfernen
     for (const cell of this.markedCells) {
-      cell.classList.remove('bg-amber-500')
+      cell.classList.remove('marked')
     }
     this.markedCells = []
   
     // Alle Zellen im tbody markieren
     const allCells = Array.from(document.querySelectorAll("tbody td")) as HTMLTableCellElement[]
     for (const cell of allCells) {
-      cell.classList.add("bg-amber-500")
+      cell.classList.add("marked")
       this.markedCells.push(cell)
     }
   

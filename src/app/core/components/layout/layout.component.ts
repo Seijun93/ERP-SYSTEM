@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { HeaderComponent } from "../header/header.component";
 import { NavigationComponent } from "../navigation/navigation.component";
 import { RouterOutlet } from '@angular/router';
@@ -10,5 +11,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
+  showLayout = false
+
+  ngOnInit(): void {
+    // Kurze Verzögerung erlaubt PrimeNG/CSS Initialisierung
+    setTimeout(() => {
+      this.showLayout = true;
+    });
+  }
 
 }

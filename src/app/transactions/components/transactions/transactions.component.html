@@ -2,10 +2,11 @@
 <div class="flex-1 min-h-full flex-col bg-gradient-to-br from-sky-50/40 to-sky-200/40">
 
     <div [@fadeIn]>
+
         <!-- Head Container -->
         <div class="flex flex-end justify-between items-end">
             <!-- Headline -->
-            <h2 class="text-4xl font-semibold mt-8 ml-8">Kunden</h2>
+            <h2 class="text-4xl font-semibold mt-8 ml-8">Vorgänge</h2>
             <!-- Buttons-->
             <div class="flex flex-row mr-8 gap-8 items-end">
                 <p-iconfield class="w-64">
@@ -14,21 +15,19 @@
                 </p-iconfield>
                 <p-splitbutton label="Aktion auswählen" [model]="[{ label: 'Vorgang erstellen', icon: 'pi pi-folder-open' }, { label: 'Angebot erstellen', icon:'pi pi-file' }]" size="small" outlined severity="info"/>
                 <p-button (click)="'console.log(noch nichts eingefügt)'" label="Löschen" icon="pi pi-trash" size="small" severity="danger"/>
-                <p-button (click)="this.customersService.addCustomerDialog()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info"/>
+                <p-button (click)="this.transactionsService.addTransaction()" label="Hinzufügen" icon="pi pi-plus" size="small" severity="info"/>
             </div>      
         </div>
-        
+    
         <!-- Body Container -->
         <div class="p-8">
-            <app-data-table [data]="this.customers" [columns]="this.tablePropertys" [openData]="openCustomer.bind(this)"/>
+            <app-data-table [data]="this.transactions" [columns]="tablePropertys" [openData]="openTransaction.bind(this)" />
         </div>
+
     </div>
 
-    
-    @if (this.customersService.showCustomerDialog()) {
-        <p-dialog header="Kunden Details" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.customersService.showCustomerDialog" [style]="{ minWidth: '48rem' }">
-            <app-create-customer />
-        </p-dialog>
-    }
-
-</div>
+@if (this.transactionsService.showTransactionsDialog()) {
+    <p-dialog header="Vorgangsdetails" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.transactionsService.showTransactionsDialog" [style]="{ minWidth: '48rem' }">
+        <app-create-transaction />
+    </p-dialog>
+}
