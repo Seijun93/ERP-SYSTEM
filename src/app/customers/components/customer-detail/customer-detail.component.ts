@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,7 +12,7 @@ import { CustomersService } from '../../services/customers.service';
 import { Customer } from '../../models/customer.model';
 
 @Component({
-  selector: 'app-create-customer',
+  selector: 'app-customer-detail',
   imports: [
     ReactiveFormsModule,
     FloatLabelModule,
@@ -20,18 +21,26 @@ import { Customer } from '../../models/customer.model';
     ButtonModule,
     TextareaModule
   ],
-  templateUrl: './create-customer.component.html',
-  styleUrl: './create-customer.component.css'
+  templateUrl: './customer-detail.component.html',
+  styleUrl: './customer-detail.component.css'
 })
-export class CreateCustomerComponent {
+export class CustomerDetailComponent {
 
   customersService = inject(CustomersService)
+  router = inject(Router)
+  route = inject(ActivatedRoute)
 
-  createCustomerForm!: FormGroup;
+  createCustomerForm!: FormGroup
 
-  selectedCustomer: Customer | null = this.customersService.selectedCustomer
+  selectedCustomerIndex: number = -1
+  selectedCustomer: Customer | null = null
 
   constructor(private fb: FormBuilder) {
+
+    const id = this.route.snapshot.paramMap.get('id')
+
+    this.selectedCustomerIndex = parseInt(id!, 10)
+    this.selectedCustomer = this.customersService.customers[this.selectedCustomerIndex]
 
     this.initForm(this.selectedCustomer)
     
@@ -56,12 +65,16 @@ export class CreateCustomerComponent {
   addCustomer(customer: Customer) {
     this.customersService.saveCustomer(customer)
     this.clearForm()
-    this.customersService.toggleCustomerDialog()
+    this.router.navigate(['/kunden'])
   }
 
   clearForm() {
     this.selectedCustomer = null
     this.initForm(null)
+  }
+
+  navigateToList() {
+    this.router.navigate(['/kunden'])
   }
 
 }

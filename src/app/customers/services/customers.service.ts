@@ -1,5 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import { Customer } from '../models/customer.model';
@@ -10,6 +11,7 @@ import { Customer } from '../models/customer.model';
 export class CustomersService {
 
   http = inject(HttpClient)
+  router = inject(Router)
 
   constructor() {
     this.readCustomers()
@@ -17,17 +19,10 @@ export class CustomersService {
 
   customers: Customer[] = []
 
-  selectedCustomer: Customer | null = null
+  // selectedCustomer: Customer | null = null
 
-  showCustomerDialog = signal(false);
-
-  toggleCustomerDialog () {
-    this.showCustomerDialog.update(value => !value)
-  }
-
-  addCustomerDialog () {
-    this.selectedCustomer = null
-    this.toggleCustomerDialog()
+  addCustomer () {
+    this.router.navigate(['/kunden/anlegen'])
   }
 
   saveCustomer (customer: Customer) {
@@ -107,19 +102,17 @@ export class CustomersService {
   }
 
   //Delete Funktion
-  deleteCustomer() {
-    if (this.selectedCustomer === null || this.selectedCustomer.id === null) {
+  deleteCustomer(id?: string) {
+    if (id === null) {
       return
     }
-    this.http.delete(`https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers/${this.selectedCustomer.id}.json`)
+    this.http.delete(`https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/customers/${id}.json`)
     .subscribe(() => {
-      const deletedIndex = this.customers.findIndex(c => c.id === this.selectedCustomer!.id)
+      const deletedIndex = this.customers.findIndex(c => c.id === id)
       if (deletedIndex !== -1) {
         this.customers.splice(deletedIndex, 1)
       }
-
-      this.selectedCustomer = null
-      this.toggleCustomerDialog()
+      this.router.navigate(['/kunden'])
     },error => {
       console.error('❌ Fehler beim Löschen des Kunden:', error)
       alert('❌ Fehler beim Löschen des Kunden')

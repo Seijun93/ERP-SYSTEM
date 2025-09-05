@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,7 +13,7 @@ import { Product } from '../../models/product';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
-  selector: 'app-create-product',
+  selector: 'app-product-detail',
   imports: [
     ReactiveFormsModule,
     FloatLabelModule,
@@ -22,18 +23,26 @@ import { ProductsService } from '../../services/products.service';
     TextareaModule,
     InputNumberModule,
   ],
-  templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.css'
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.css'
 })
-export class CreateProductComponent {
+export class ProductDetailComponent {
 
   productsService = inject(ProductsService)
+  router = inject(Router)
+  route = inject(ActivatedRoute)
 
   createProductForm!: FormGroup
 
-  selectedProduct: Product | null = this.productsService.selectedProduct
+  selectedProductIndex: number = -1
+  selectedProduct: Product | null = null
 
   constructor(private fb: FormBuilder) {
+
+    const id = this.route.snapshot.paramMap.get('id')
+
+    this.selectedProductIndex = parseInt(id!, 10)
+    this.selectedProduct = this.productsService.products[this.selectedProductIndex]
 
     this.initForm(this.selectedProduct)
 
@@ -53,12 +62,16 @@ export class CreateProductComponent {
   addProduct(product: Product) {
     this.productsService.saveProduct(product)
     this.clearForm()
-    this.productsService.toggleProductDialog()
+    this.router.navigate(['/produkte'])
   }
 
   clearForm() {
     this.selectedProduct = null
     this.initForm(null)
+  }
+
+  navigateToList() {
+    this.router.navigate(['/produkte'])
   }
 
 }

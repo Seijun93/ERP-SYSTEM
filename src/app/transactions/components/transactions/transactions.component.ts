@@ -12,7 +12,6 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { DataTableComponent } from "../../../core/framework/data-table/data-table.component";
 import { TransactionsService } from '../../services/transactions.service';
 import { Transaction } from '../../models/transaction.model';
-import { CreateTransactionComponent } from "../create-transaction/create-transaction.component";
 
 @Component({
   selector: 'app-transactions',
@@ -21,7 +20,6 @@ import { CreateTransactionComponent } from "../create-transaction/create-transac
     TableModule,
     DialogModule,
     DataTableComponent,
-    CreateTransactionComponent,
     IconFieldModule,
     InputIconModule,
     InputTextModule,
@@ -54,7 +52,7 @@ export class TransactionsComponent {
   ]
 
   openTransaction() {
-    this.transactionsService.toggleTransactionDialog()
+    
   }
 
 }

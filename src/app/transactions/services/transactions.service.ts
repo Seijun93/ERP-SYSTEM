@@ -1,4 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Transaction } from '../models/transaction.model';
 
@@ -6,6 +8,9 @@ import { Transaction } from '../models/transaction.model';
   providedIn: 'root'
 })
 export class TransactionsService {
+
+  http = inject(HttpClient)
+  router = inject(Router)
 
   constructor() { }
 
@@ -32,14 +37,8 @@ export class TransactionsService {
 
   selectedTransaction: any | null = null
 
-  showTransactionsDialog = signal(false)
-
-  toggleTransactionDialog() {
-    this.showTransactionsDialog.update(value => !value)
-  }
-
   addTransaction() {
     this.selectedTransaction = null
-    this.toggleTransactionDialog()
+    this.router.navigate(['/vorgaenge/anlegen'])
   }
 }

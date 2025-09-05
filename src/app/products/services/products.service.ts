@@ -1,8 +1,9 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 import { Product } from '../models/product';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { map } from 'rxjs';
 export class ProductsService {
 
   http = inject(HttpClient)
+  router = inject(Router)
 
   constructor() {
     this.readProducts()
@@ -17,17 +19,10 @@ export class ProductsService {
 
   products: Product[] = []
 
-  selectedProduct: Product | null = null
+  // selectedProduct: Product | null = null
 
-  showProductsDialog = signal(false);
-
-  toggleProductDialog () {
-    this.showProductsDialog.update(value => !value)
-  }
-
-  addProductDialog () {
-    this.selectedProduct = null
-    this.toggleProductDialog()
+  addProduct () {
+    this.router.navigate(['/produkte/anlegen'])
   }
 
   saveProduct (product: Product) {
@@ -106,19 +101,17 @@ export class ProductsService {
   }
 
   //Delete Funktion
-  deleteProduct() {
-    if (this.selectedProduct === null || this.selectedProduct.id === null) {
+  deleteProduct(id?: string) {
+    if (id === null) {
       return
     }
-    this.http.delete(`https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/products/${this.selectedProduct.id}.json`)
+    this.http.delete(`https://erp-system-e5e14-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`)
     .subscribe(() => {
-      const deletedIndex = this.products.findIndex(c => c.id === this.selectedProduct!.id)
+      const deletedIndex = this.products.findIndex(p => p.id === id)
       if (deletedIndex !== -1) {
         this.products.splice(deletedIndex, 1)
       }
-
-      this.selectedProduct = null
-      this.toggleProductDialog()
+      this.router.navigate(['/produkte'])
     },error => {
       console.error('❌ Fehler beim Löschen des Kunden:', error)
       alert('❌ Fehler beim Löschen des Kunden')

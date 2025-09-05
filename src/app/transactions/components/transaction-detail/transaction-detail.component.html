@@ -1,0 +1,64 @@
+<!-- Main Container -->
+<div class="flex-1 min-h-full flex-col bg-gradient-to-br from-sky-50/40 to-sky-200/40">
+  <div [@fadeIn]>
+
+    <!-- Head Container -->
+    <div class="flex justify-between items-end px-8 pt-8">
+      <h2 class="text-4xl font-semibold">Vorgang erstellen</h2>
+      <div class="flex gap-4">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Speichern</button>
+        <button class="bg-white border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded">Abbrechen</button>
+      </div>
+    </div>
+
+    <!-- Body Container -->
+    <div class="flex flex-row gap-8 p-8">
+
+      <!-- Left: Kundendaten & Bemerkungen -->
+      <div class="flex-1 max-w-192 space-y-6">
+        <div class="bg-white p-6 rounded-xl drop-shadow-xs">
+          <h3 class="text-lg font-semibold mb-4">Kunde</h3>
+          <p-floatLabel variant="on" class="mt-4">
+            <input id="number" pInputText formControlName="number">
+            <label for="number">Kundennummer</label>
+          </p-floatLabel>
+          <p-floatLabel variant="on" class="mt-4">
+            <input id="name" pInputText formControlName="name">
+            <label for="name">Name</label>
+          </p-floatLabel>
+            
+          <button class="mt-4 px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">Kunde auswählen</button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl drop-shadow-xs">
+          <h3 class="text-lg font-semibold mb-2">Bemerkungen</h3>
+          <textarea rows="5" class="w-full border border-gray-300 rounded p-2 resize-none"></textarea>
+        </div>
+      </div>
+
+      <!-- Right: Status & Details -->
+      <div class="flex-1 max-w-192 space-y-4 overflow-y-auto max-h-[700px]">
+        <div class="bg-white p-4 rounded-xl drop-shadow-xs">
+          <h3 class="text-lg font-semibold mb-2">Status</h3>
+          <p class="border border-gray-300 px-3 py-1 rounded inline-block text-sm">Angebot offen</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl drop-shadow-xs">
+          <h3 class="text-lg font-semibold mb-2">Details</h3>
+          <ul class="space-y-1 text-sm">
+            <li><a href="#" class="text-blue-600 hover:underline">Angebot erstellen</a></li>
+            <li><a href="#" class="text-blue-600 hover:underline">Auftrag erstellen</a></li>
+            <li><a href="#" class="text-blue-600 hover:underline">Korrespondenz erfassen</a></li>
+            <li>5. Februar 2024 – Angebot erstellt</li>
+            <li>9. Februar 2024 – Auftrag erstellt</li>
+            <li>12. Februar 2024 – Teillieferung erfolgt</li>
+            <li>19. Februar 2024 – Lieferung erfolgt</li>
+            <li>20. Februar 2024 – Rechnung gestellt</li>
+            <li>29. Februar 2024 – Korrespondenz: Angebotsnachverfolgung</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

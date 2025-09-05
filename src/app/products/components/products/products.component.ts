@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -10,7 +11,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { DataTableComponent } from "../../../core/framework/data-table/data-table.component";
-import { CreateProductComponent } from "../create-product/create-product.component";
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/product';
 
@@ -21,7 +21,6 @@ import { Product } from '../../models/product';
     TableModule,
     DialogModule,
     DataTableComponent,
-    CreateProductComponent,
     IconFieldModule,
     InputIconModule,
     InputTextModule,
@@ -41,6 +40,7 @@ import { Product } from '../../models/product';
 export class ProductsComponent {
   
   productsService = inject(ProductsService)
+  router = inject(Router)
 
   products: Product[] = this.productsService.products
   
@@ -52,8 +52,7 @@ export class ProductsComponent {
   ]
 
   openProduct(index: number) {
-    this.productsService.selectedProduct = this.productsService.products[index]
-    this.productsService.showProductsDialog.update(value => !value)
+    this.router.navigate(['/produkte/' + index])
   }
 
 }

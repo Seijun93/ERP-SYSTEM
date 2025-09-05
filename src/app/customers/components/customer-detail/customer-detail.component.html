@@ -1,4 +1,5 @@
 <div class="flex flex-row justify-center items-center">
+    <p-button icon="pi pi-arrow-left" label="Zurück" severity="info" (click)="this.navigateToList()"/>
 
     <form [formGroup]="createCustomerForm" class="flex flex-col m-4 mt-2 gap">
         <!-- Kundennummer -->
@@ -66,12 +67,12 @@
         <!-- Button Area -->
         <div class="flex justify-between mt-16">
             <div class="flex gap-4">
-                <p-button label="Löschen" severity="danger" (click)="customersService.deleteCustomer()"/>
+                <p-button label="Löschen" severity="danger" (click)="customersService.deleteCustomer(this.selectedCustomer?.id)"/>
             </div>
             <div class="flex flex-row-reverse gap-4">
-                <p-button label="Speichern" [raised]="true" severity="success" [disabled]="!this.createCustomerForm.valid" (click)="this.addCustomer(createCustomerForm.getRawValue())"/>
+                <p-button label="Speichern" severity="success" [disabled]="!this.createCustomerForm.valid" (click)="this.addCustomer(createCustomerForm.getRawValue())"/>
                 <p-button label="Zwischnspeichern" variant="outlined" severity="success" />
-                <p-button label="Clear" variant="outlined" severity="danger" (click)="this.clearForm()"/>
+                <p-button label="Zurücksetzen" variant="outlined" severity="danger" (click)="this.clearForm()"/>
             </div>
         </div>
 

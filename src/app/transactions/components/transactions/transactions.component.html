@@ -25,9 +25,4 @@
         </div>
 
     </div>
-
-@if (this.transactionsService.showTransactionsDialog()) {
-    <p-dialog header="Vorgangsdetails" [modal]="true" [resizable]="true" [maximizable]="true" [(visible)]="this.transactionsService.showTransactionsDialog" [style]="{ minWidth: '48rem' }">
-        <app-create-transaction />
-    </p-dialog>
-}
+</div>

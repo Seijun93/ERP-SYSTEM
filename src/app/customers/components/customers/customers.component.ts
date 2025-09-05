@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -19,7 +20,6 @@ import { DataTableComponent } from '../../../core/framework/data-table/data-tabl
     ButtonModule,
     TableModule,
     DialogModule,
-    CreateCustomerComponent,
     DataTableComponent,
     IconFieldModule,
     InputIconModule,
@@ -33,13 +33,14 @@ import { DataTableComponent } from '../../../core/framework/data-table/data-tabl
       transition(':enter', [
         style({ opacity: 0 }),
         animate('800ms ease-out', style({ opacity: 1 }))
-      ])
-    ])
+      ]),
+    ]),
   ]
 })
 export class CustomersComponent {
 
   customersService = inject(CustomersService)
+  router = inject(Router)
 
   customers: Customer[] = this.customersService.customers
   showCustomersDialog: boolean = false
@@ -56,8 +57,8 @@ export class CustomersComponent {
   ]
 
   openCustomer(index: number) {
-    this.customersService.selectedCustomer = this.customersService.customers[index]
-    this.customersService.showCustomerDialog.update(value => !value)
+    console.log(index)
+    this.router.navigate(['/kunden/' + index])
   }
 
 }
