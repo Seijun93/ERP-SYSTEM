@@ -11,7 +11,6 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { CustomersService } from '../../services/customers.service';
 import { Customer } from '../../models/customer.model';
-import { CreateCustomerComponent } from "../create-customer/create-customer.component";
 import { DataTableComponent } from '../../../core/framework/data-table/data-table.component';
 
 @Component({
