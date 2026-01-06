@@ -11,7 +11,7 @@
 
             @for (row of columns; track $index) {
 
-                <td (click)="toggleMark($event)" [class]="row.class">{{ applyPipe(data[row.key], row.pipe) }}</td>
+                <td (click)="toggleMark($event)" [class]="row.class">{{ applyPipe(getCellValue(data, row.key), row.pipe) }}</td>
 
             }
             

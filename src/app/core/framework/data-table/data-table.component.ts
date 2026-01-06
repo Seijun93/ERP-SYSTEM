@@ -259,4 +259,26 @@ export class DataTableComponent {
     return value; // fallback
   }
 
+  // Unterstützt verschachtelte Keys wie 'customer.name' oder 'customer.address.city'
+  getCellValue(rowData: any, key: string | ((row:any) => any) | undefined): any {
+    if (key === null || key === undefined) return undefined;
+    if (!rowData) return undefined;
+
+    // Falls key eine Funktion ist, unterstütze das
+    if (typeof key === 'function') return (key as ((row:any) => any))(rowData);
+
+    // Falls key ein String ist: Aufteilen bei '.' und verschachtelte Werte auflösen
+    if (typeof key === 'string') {
+      const parts = key.split('.');
+      let value = rowData;
+      for (const part of parts) {
+        if (value === null || value === undefined) return undefined;
+        value = value[part];
+      }
+      return value;
+    }
+
+    return undefined;
+  }
+
 }

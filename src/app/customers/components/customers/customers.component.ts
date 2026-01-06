@@ -43,7 +43,6 @@ export class CustomersComponent {
   router = inject(Router)
 
   customers: Customer[] = this.customersService.customers
-  showCustomersDialog: boolean = false
 
   tablePropertys: any[] = [
     {label: 'Kundennummer', key: 'number', class: 'min-w-40 w-40'},
