@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -8,7 +9,10 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { ButtonModule } from 'primeng/button';
 import { TextareaModule } from 'primeng/textarea';
 import { TransactionsService } from '../../services/transactions.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Dialog } from "primeng/dialog";
+
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { Customer } from '../../../customers/models/customer.model';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -18,7 +22,9 @@ import { Router, ActivatedRoute } from '@angular/router';
     InputTextModule,
     FieldsetModule,
     ButtonModule,
-    TextareaModule
+    TextareaModule,
+    Dialog,
+    AddCustomerComponent
   ],
   templateUrl: './transaction-detail.component.html',
   styleUrl: './transaction-detail.component.css',
@@ -42,29 +48,54 @@ export class TransactionDetailComponent {
   selectedTransactionIndex: number = -1
   selectedTransaction: any | null = null
 
+  customerSelected: boolean = false
+  customerSelectionVisible: boolean = false
+
   constructor(private fb: FormBuilder) { 
     const id = this.route.snapshot.paramMap.get('id')
 
     this.selectedTransactionIndex = parseInt(id!, 10)
     this.selectedTransaction = this.transationService.transactions[this.selectedTransactionIndex]
 
+    this.initForm(this.selectedTransaction)
 
+    if (this.createTransactionForm.get('customerNumber')?.value != null) {
+      this.customerSelected = true
+    }
   }
 
   initForm(transaction: any | null = null) {
   
       this.createTransactionForm = this.fb.group({
-        number: [{ value: transaction?.transactionNumber ?? null, disabled: true }],
-        name: [transaction?.name ?? null, [Validators.required]],
-        street: [transaction?.street ?? null, [Validators.required]],
-        postcode: [transaction?.postcode ?? null, [Validators.required, Validators.pattern('^[0-9]{5}$')]],
-        city: [transaction?.city ?? null, [Validators.required]],
-        email: [transaction?.email ?? null, [Validators.email]],
-        phone: [transaction?.phone ?? null, [Validators.pattern('^[0-9]*$')]],
-        mobile: [transaction?.mobile ?? null, [Validators.pattern('^[0-9]*$')]],
+        customerId: [transaction?.customer.id ?? null],
+        customerNumber: [{ value: transaction?.customer.number ?? null, disabled: true }, [Validators.required]],
+        customerName: [{ value: transaction?.customer.name ?? null, disabled: true }, [Validators.required]],
+        customerStreet: [{ value: transaction?.customer.street ?? null, disabled: true }, [Validators.required]],
+        customerPostcode: [{ value: transaction?.customer.postcode ?? null, disabled: true }, [Validators.required, Validators.pattern('^[0-9]{5}$')]],
+        customerCity: [{ value: transaction?.customer.city ?? null, disabled: true }, [Validators.required]],
+        description: [transaction?.description ?? null, [Validators.required, Validators.minLength(10)]],
         text: [transaction?.text ?? null]
       })
   
     }
 
+  navigateToList() {
+    this.router.navigate(['/vorgaenge'])
+  }
+
+  openCustomerSelection() {
+    this.customerSelectionVisible = true
+  }
+
+  addCustomer(customer: Customer) {
+    this.createTransactionForm.patchValue({
+      customerId: customer.id,
+      customerNumber: customer.number,
+      customerName: customer.name,
+      customerStreet: customer.street,
+      customerPostcode: customer.postcode,
+      customerCity: customer.city
+    })
+    this.customerSelectionVisible = false
+  }
 }

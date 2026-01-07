@@ -21,7 +21,10 @@ export class TransactionsService {
       customer: {
         id: '',
         name: 'Mustermann',
-        nummer: '2',
+        number: '2',
+        street: 'Musterstraße 1',
+        postcode: '12345',
+        city: 'Musterstadt'
       },
       description: 'Das ist ein erster Testvorgang um die Darstellung der Data-Table zu testen',
       createDate: '09.05.2025',
@@ -37,7 +40,10 @@ export class TransactionsService {
       customer: {
         id: '',
         name: 'Testkunde',
-        nummer: '2',
+        number: '2',
+        street: 'Testweg 5',
+        postcode: '54321',
+        city: 'Teststadt'
       },
       description: 'Das ist ein zweiter Testvorgang um die Darstellung der Data-Table zu testen',
       createDate: '10.05.2025',

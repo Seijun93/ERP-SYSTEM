@@ -1,0 +1,53 @@
+<div class="flex flex-col">
+
+    <!-- Suchfelder -->
+    <form [formGroup]="searchForm" class="flex flex-row mr-8 items-end gap-2 pt-4 pl-10">
+        <!-- Suchfeld KdNr -->
+        <p-floatlabel variant="on">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search"/>
+                <input type="text" id="searchCustomerNumber" pInputText class="w-40 h-[2.25rem] px-3 text-sm rounded-md border" (input)="filterCustomers()" formControlName="customerNumber"/>
+            </p-iconfield>
+            <label for="searchCustomerNumber">Kundennr.</label>
+        </p-floatlabel>
+        <!-- Suchfeld Name -->
+        <p-floatlabel variant="on">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input type="text" id="searchCustomerName" pInputText class="w-60 h-[2.25rem] px-3 text-sm rounded-md border" (input)="filterCustomers()" formControlName="customerName"/>
+            </p-iconfield>
+            <label for="searchCustomerName">Name</label>
+        </p-floatlabel>
+        <!-- Suchfeld Straße -->
+        <p-floatlabel variant="on">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input type="text" id="searchCustomerStreet" pInputText class="w-80 h-[2.25rem] px-3 text-sm rounded-md border" (input)="filterCustomers()" formControlName="customerStreet"/>
+            </p-iconfield>
+            <label for="searchCustomerStreet">Straße</label>
+        </p-floatlabel>
+        <!-- Suchfeld PLZ -->
+        <p-floatlabel variant="on">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input type="text" id="searchCustomerPostalCode" pInputText class="w-40 h-[2.25rem] px-3 text-sm rounded-md border" (input)="filterCustomers()" formControlName="customerPostalCode"/>
+            </p-iconfield>
+            <label for="searchCustomerPostalCode">PLZ</label>
+        </p-floatlabel>
+        <!-- Suchfeld Ort -->
+        <p-floatlabel variant="on">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input type="text" id="searchCustomerCity" pInputText class="w-60 h-[2.25rem] px-3 text-sm rounded-md border" (input)="filterCustomers()" formControlName="customerCity"/>
+            </p-iconfield>
+            <label for="searchCustomerCity">Ort</label>
+        </p-floatlabel>
+    </form>
+
+    <!-- Kunden Tabelle -->
+    <div class="p-8 pb-4">
+        <app-data-table [data]="this.filteredCustomers" [columns]="this.tablePropertys" [openData]="chooseCustomer.bind(this)"/>
+    </div>
+    <p class="text-sm pl-8 italic">Doppelklick auf einen Kunden, um ihn auszuwählen.</p>
+
+</div>
